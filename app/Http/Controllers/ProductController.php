@@ -26,7 +26,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::all();
+        $products = Product::pagination(15);
 
         // Method 1 - use the cache remember function
         $featured = Cache::remember('featured', 10* 60, function () use ($products) {
