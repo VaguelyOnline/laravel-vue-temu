@@ -34,7 +34,7 @@ export default {
 <template>
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container">
-            <Link class="navbar-brand" :href="route('example1')">
+            <Link class="navbar-brand" :href="route('products.index')">
                 <img src="https://getbootstrap.com/docs/5.3/assets/brand/bootstrap-logo.svg" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
                 {{ $page.props.app.name }}
             </Link>
