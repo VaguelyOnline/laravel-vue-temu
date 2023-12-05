@@ -64,3 +64,9 @@ export default {
         </div>
     </nav>
 </template>
+
+<style scoped>
+.navbar-brand {
+    background-color: blue;
+}
+</style>
