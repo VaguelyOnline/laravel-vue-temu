@@ -36,7 +36,7 @@ export default {
         <div class="container">
             <Link class="navbar-brand" :href="route('products.index')">
                 <img src="https://getbootstrap.com/docs/5.3/assets/brand/bootstrap-logo.svg" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
-                The Easy Temu App
+                {{ $page.props.app.name }}
             </Link>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
