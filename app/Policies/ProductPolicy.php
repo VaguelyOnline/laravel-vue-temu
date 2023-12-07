@@ -6,7 +6,6 @@ use App\Models\Image;
 use App\Models\Product;
 use App\Models\User;
 use Illuminate\Auth\Access\Response;
-use Illuminate\Support\Facades\Auth;
 
 class ProductPolicy
 {
@@ -39,7 +38,7 @@ class ProductPolicy
      */
     public function update(User $user, Product $product): bool
     {
-        return Auth::user()->hasRole('admin');
+        return $user->hasRole('admin');
     }
 
     /**
@@ -47,7 +46,7 @@ class ProductPolicy
      */
     public function delete(User $user, Product $product): bool
     {
-        return Auth::user()->hasRole('admin');
+        return $user->hasRole('admin');
     }
 
     public function deleteImg(User $user, Product $product, Image $image): bool
