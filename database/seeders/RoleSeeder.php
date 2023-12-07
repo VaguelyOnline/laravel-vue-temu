@@ -13,7 +13,6 @@ class RoleSeeder extends Seeder
      */
     public function run(): void
     {
-        Role::truncate();
-        Role::create(['name' => 'admin']);
+        Role::findOrCreate('admin');
     }
 }
