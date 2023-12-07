@@ -26,23 +26,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::all();
-
-        // Method 1 - use the cache remember function
-        $featured = Cache::remember('featured', 10* 60, function () use ($products) {
-            return $products->random(3);
-        });
-
-        // Method 2 - use the individual cache functions
-        /*
-        if (!Cache::has('featured'))
-            // Cache the recommended products for 10 minutes (10 x 60 seconds)
-            Cache::put('featured', $products->random(3), 10 * 60);
-        
-        $featured = Cache::get('featured');
-        */
-
-        return Inertia::render('Products/ProductIndex', compact('products', 'featured'));
+        return Inertia::render('Products/ProductIndex');
     }
 
     /**
