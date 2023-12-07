@@ -14,7 +14,7 @@ class DatabaseSeeder extends Seeder
     {
         // php artisan make:seeder ProductSeeder
         // php artisan db:seed
-
+        $this->call(RoleSeeder::class);
         $this->call(UserSeeder::class);
         $this->call(ProductSeeder::class);
         $this->call(ImageSeeder::class);
