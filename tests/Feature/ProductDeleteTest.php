@@ -25,6 +25,10 @@ class ProductDeleteTest extends TestCase
 
         $product = Product::all()->random();
 
+        # Those without auth cannot delete
+        $this->delete(route('api.products.images.delete', [$product->id, $product->images->first()->id]))
+            ->assertStatus(302);
+
         # Those without admin role cannot delete
         $this->actingAs($user)
             ->delete(route('api.products.images.delete', [$product->id, $product->images->first()->id]))
