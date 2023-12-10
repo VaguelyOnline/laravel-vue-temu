@@ -26,7 +26,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::all();
+        $products = Product::paginate(10);
 
         // Method 1 - use the cache remember function
         $featured = Cache::remember('featured', 10* 60, function () use ($products) {
@@ -38,7 +38,7 @@ class ProductController extends Controller
         if (!Cache::has('featured'))
             // Cache the recommended products for 10 minutes (10 x 60 seconds)
             Cache::put('featured', $products->random(3), 10 * 60);
-        
+
         $featured = Cache::get('featured');
         */
 
@@ -79,10 +79,10 @@ class ProductController extends Controller
      * This action is just to show you what the email will look like in an inbox that supports
      * HTML (some users prefer to have just text emails, in which case a text version will be
      * generated automatically).
-     * 
-     * Note - no email is actually sent by calling this route - for that (as in the storeImage 
+     *
+     * Note - no email is actually sent by calling this route - for that (as in the storeImage
      * action), you would call:
-     * 
+     *
      * Mail::to('someone@example.com')->send(new ImageAddedNotificationEmail($product));
      */
     public function previewEmail(Product $product)
@@ -115,7 +115,7 @@ class ProductController extends Controller
     {
         $product->load('images');
         return Inertia::render('Products/ProductEdit', compact('product'));
-        
+
     }
 
     /**
