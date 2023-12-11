@@ -14,8 +14,7 @@ class ProductObserver
     {
         Audit::create([
             // 'user_id'=>1, When seeding product creation does not have a user id - thus set user_id to one when seeding then back to user id thereafter.
-
-            'user_id'=>auth()->id(),
+            'user_id'=>auth()->check()?auth()->id() : 1,
             'action_type'=>'created',
             'affected_product_id'=>$product->id,
         ]);
@@ -27,7 +26,7 @@ class ProductObserver
     public function updated(Product $product): void
     {
         Audit::create([
-            'user_id'=>auth()->id(),
+            'user_id'=>auth()->check()?auth()->id() : 1,
             'action_type'=>'updated',
             'affected_product_id'=>$product->id,
         ]);
@@ -39,7 +38,7 @@ class ProductObserver
     public function deleted(Product $product): void
     {
         Audit::create([
-            'user_id'=>auth()->id(),
+            'user_id'=>auth()->check()?auth()->id() : 1,
             'action_type'=>'deleted',
             'affected_product_id'=>$product->id,
         ]);
