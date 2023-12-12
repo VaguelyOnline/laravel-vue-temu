@@ -8,13 +8,13 @@ use Inertia\Inertia;
 require __DIR__.'/auth.php';
 
 Route::get('/', function () {
-    return Inertia::render('Welcome', [
+    return Inertia::render('Products/ProductIndex', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
         'laravelVersion' => Application::VERSION,
         'phpVersion' => PHP_VERSION,
     ]);
-})->name('welcome');
+})->name('products.index');
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
