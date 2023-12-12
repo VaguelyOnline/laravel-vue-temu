@@ -65,9 +65,9 @@ export default {
     <Head :title="title" />
 
     <MainLayout>
-        <h1>
+        <h1 style="color: rgb(32, 125, 255)">
             {{ product.title }}
-
+        </h1>
             <Link :href="route('products.edit', product)" v-if="permissions.update" class="btn btn-outline-secondary me-3 ms-5">Edit</Link>
             <Link :href="route('products.email.preview', product)" class="btn btn-outline-secondary me-3">Preview email</Link>
             <button :disabled="networking" v-if="permissions.delete" @click="deleteProduct" class="btn btn-outline-danger">Delete</button>
