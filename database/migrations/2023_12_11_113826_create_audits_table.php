@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('audits', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(User::class);
+            $table->foreignIdFor(User::class)->nullable();
             $table->string('action_type');
             $table->foreignIdFor(Product::class, 'affected_product_id');
             $table->timestamps();
