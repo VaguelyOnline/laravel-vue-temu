@@ -2,8 +2,8 @@
 
 namespace App\Observers;
 
+use App\Jobs\NotifyOfProductUpdate;
 use App\Models\Product;
-use App\Models\Audit;
 
 class ProductObserver
 {
@@ -21,6 +21,9 @@ class ProductObserver
     public function updated(Product $product): void
     {
         $product->recordAudit('updated');
+
+        // Queue a task for later processing...
+        NotifyOfProductUpdate::dispatch($product);
     }
 
     /**
