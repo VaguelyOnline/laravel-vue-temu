@@ -15,10 +15,10 @@ use Inertia\Inertia;
 
 class ProductController extends Controller
 {
-    public function __construct()
-    {
-        $this->authorizeResource(Product::class);
-    }
+    // public function __construct()
+    // {
+    //     //$this->authorizeResource(Product::class);
+    // }
 
 
     /**
