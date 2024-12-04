@@ -2,6 +2,7 @@
 
 namespace App\Policies;
 
+use App\Models\Image;
 use App\Models\Product;
 use App\Models\User;
 use Illuminate\Auth\Access\Response;
@@ -11,7 +12,7 @@ class ProductPolicy
     /**
      * Determine whether the user can view any models.
      */
-    public function viewAny(User $user): bool
+    public function viewAny(?User $user): bool
     {
         return true;
     }
@@ -19,7 +20,7 @@ class ProductPolicy
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, Product $product): bool
+    public function view(?User $user, Product $product): bool
     {
         return true;
     }
@@ -37,7 +38,7 @@ class ProductPolicy
      */
     public function update(User $user, Product $product): bool
     {
-        return $this->delete($user, $product);
+        return $user->hasRole('admin');
     }
 
     /**
@@ -45,7 +46,12 @@ class ProductPolicy
      */
     public function delete(User $user, Product $product): bool
     {
-        return $user->id == 1;
+        return $user->hasRole('admin');
+    }
+
+    public function deleteImg(User $user, Product $product, Image $image): bool
+    {
+        return $product->images->contains($image) && $user->hasRole('admin');
     }
 
     /**

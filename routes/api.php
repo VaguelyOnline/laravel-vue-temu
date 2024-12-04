@@ -37,6 +37,10 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/products/{product}/images', [ProductController::class, 'storeImage'])
         ->can('update', 'product')
         ->name('api.products.images.store');
+    
+    Route::delete('products/{product}/images/{image}', [ProductController::class, 'deleteImg'])
+        ->middleware('can:deleteImg,product,image')
+        ->name('api.products.images.delete');
 
     Route::post('/calc/mult', [CalculatorController::class, 'multiply'])
         ->name('api.calculator.multiply');

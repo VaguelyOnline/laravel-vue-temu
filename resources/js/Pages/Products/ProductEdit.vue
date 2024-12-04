@@ -70,7 +70,12 @@
                 <hr>
                 <div class="row">
                     <div class="col-4" v-for="image in model.images" :key="image.id">
-                        <img class="img-thumbnail mb-3" :src="image.url">
+                        <div class="row col">
+                            <img class="img-thumbnail mb-3" :src="image.url">
+                        </div>
+                        <div class="row col text-center">
+                            <button class="btn btn-sm btn-danger" @click="deleteImg(image)">Delete</button>
+                        </div>
                     </div>
                     <div v-if="savingImage" class="spinner-grow" style="width: 4rem; height: 4rem;" role="status" />
                 </div>
@@ -141,6 +146,14 @@ export default {
                     .then(this.onImageSaved)
                     .catch(error => alert('Failed'));
             }
+        },
+
+        deleteImg(image) {
+            axios.delete(route('api.products.images.delete', [this.model.id, image.id]))
+                .then(response => {
+                    this.model.images = this.model.images.filter(img => img.id !== image.id);
+                })
+                .catch(error => console.log(error));
         },
 
         onImageSaved(response) {

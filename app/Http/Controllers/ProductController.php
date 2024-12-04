@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreImageRequest;
 use App\Http\Requests\UpdateProductRequest;
 use App\Mail\ImageAddedNotificationEmail;
+use App\Models\Image;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -75,6 +76,12 @@ class ProductController extends Controller
         return $product->images()->create(compact('url'));
     }
 
+    public function deleteImg(Product $product, Image $image)
+    {
+        Storage::delete($image->url);
+        $image->delete();
+    }
+
     /**
      * This action is just to show you what the email will look like in an inbox that supports
      * HTML (some users prefer to have just text emails, in which case a text version will be
@@ -96,9 +103,16 @@ class ProductController extends Controller
     public function show(Product $product)
     {
         $permissions = [
-            'delete' => Auth::user()->can('delete', $product),
-            'update' => Auth::user()->can('update', $product)
+            'delete' => false,
+            'update' => false
         ];
+
+        if(Auth::user()) {
+            $permissions = [
+                'delete' => Auth::user()->can('delete', $product),
+                'update' => Auth::user()->can('update', $product)
+            ];
+        }
 
         $product->load('images');
 
