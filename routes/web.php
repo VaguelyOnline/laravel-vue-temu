@@ -63,5 +63,8 @@ if (app()->environment('local'))
     });
 }
 
+Route::get('/products', [ProductController::class, 'index'])
+    ->name('products.index');
+
 Route::get('products/{product}/previewEmail', [ProductController::class, 'previewEmail'])
     ->name('products.email.preview');
